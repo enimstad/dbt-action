@@ -3,20 +3,16 @@
 name: Run all dbt tests
 
 on:
-  push:
   pull_request:
     types: ['closed']
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event_name = 'pull_request' && github.event.pull_request.merged = 'true'
 
     steps:
       # Checkout this repo in order to access profiles.yml
       - name: log stuff
       
-        run: |
-          echo ${{ github.event_name }}
-          cat ${{ github.event_path }}
-          echo ${{ github.event }}
+        run:
+          echo pr merged ${{ github.event.pull_request.merged }}
