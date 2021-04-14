@@ -16,4 +16,5 @@ jobs:
       - name: log stuff
         run: |
           echo ${{ github.event_name }}
+          cat ${{ github.event_path }}
           echo ${{ github.event }}
