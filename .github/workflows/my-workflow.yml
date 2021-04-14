@@ -1,27 +1,19 @@
-name: Schedule dbt
+# This workflow is used to run all dbt tests
+
+name: Run all dbt tests
 
 on:
   push:
-    paths:
-      - 'dbt_project/**'
-  # schedule:
-  #   - cron:  '*/15 * * * *'
+  pull_request:
+    types: ['closed']
 
 jobs:
-  action:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: dbt-run
-        id: dbt-run
-        uses: ./
-        with:
-          dbt_command: "dbt run --profiles-dir ."
-          dbt_project_folder: "dbt_project"
-        env:
-          DBT_BIGQUERY_TOKEN: ${{ secrets.DBT_BIGQUERY_TOKEN }}
-      - name: Get the result
-        run: echo "${{ steps.dbt-run.outputs.result }}"
-        shell: bash
+      # Checkout this repo in order to access profiles.yml
+      - name: log stuff
+        run: |
+          echo ${{ github.event_name }}
+          echo ${{ github.event_path }}
