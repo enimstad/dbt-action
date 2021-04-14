@@ -1,17 +1,13 @@
 # This workflow is used to run all dbt tests
 
-name: Run all dbt tests
+name: test push
 
 on:
   push:
-  pull_request:
-    types: ['closed']
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push') || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
-
     steps:
       # Checkout this repo in order to access profiles.yml
       - name: log stuff
